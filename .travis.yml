@@ -18,6 +18,9 @@ notifications:
 services:
   - postgresql
 
+addons:
+  postgresql: '9.5'
+
 before_script:
   # Create `goddd` username, password and database
   - psql -c "CREATE DATABASE goddd;" -U postgres
