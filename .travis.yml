@@ -2,10 +2,10 @@ dist: bionic
 
 language: go
 
-env: GO111MODULE=on GOFLAGS='-mod vendor'
-
-go:
-  - 1.13.x
+env:
+  global:
+    - GOX_FLAGS="-arch amd64"
+    - TRAVIS_GO_VERSION=$(cat .go-version)
 
 git:
   depth: 1
