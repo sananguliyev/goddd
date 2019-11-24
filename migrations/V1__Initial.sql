@@ -1,39 +1,4 @@
 --
--- PostgreSQL database dump
---
-
--- Dumped from database version 9.5.6
--- Dumped by pg_dump version 9.5.6
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
-SET search_path = public, pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
---
 -- Name: ratings; Type: TABLE; Schema: public; Owner: goddd
 --
 
@@ -86,18 +51,3 @@ Lyulya kebab	15	3	f	61b4e6c2-8d3d-4664-8588-f8554b9504f5
 Erishte	45	4	t	81ba1608-8920-4c65-ab52-838896b12383
 Dovgha	20	2	t	0d93bda0-f040-4564-967b-e59bf5571dcd
 \.
-
-
---
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
---
--- PostgreSQL database dump complete
---
