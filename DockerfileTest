@@ -1,0 +1,16 @@
+FROM golang:1.13-alpine
+
+# Because of https://github.com/golang/go/issues/28065
+ENV CGO_ENABLED=0
+
+WORKDIR /app
+ADD . .
+
+# Get mockery and create mock files
+RUN go get github.com/vektra/mockery/.../
+RUN mockery -dir domain/repository -name RecipeRepository
+RUN mockery -dir domain/repository -name RatingRepository
+RUN mockery -dir domain/interactor -name RecipeInteractor
+RUN mockery -dir domain/tool -name IdGenerator
+
+CMD go test -coverprofile=coverage.out ./...

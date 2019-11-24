@@ -1,0 +1,54 @@
+version: '3'
+services:
+    go:
+        build: .
+        ports:
+            - "80:8080"
+        links:
+            - postgres
+        environment:
+            DEBUG: 'true'
+            PORT: 8080
+            DATABASE_HOST: postgres
+            DATABASE_PORT: 5432
+            DATABASE_USER: goddd
+            DATABASE_PASSWORD: goddd
+            DATABASE_DB: goddd
+
+    postgres:
+        image: onjin/alpine-postgres:9.5
+        restart: unless-stopped
+        ports:
+            - "5432:5432"
+        environment:
+            LC_ALL: C.UTF-8
+            POSTGRES_USER: goddd
+            POSTGRES_PASSWORD: goddd
+            POSTGRES_DB: goddd
+
+    # Database migration service
+    flyway:
+        image: flyway/flyway
+        command: -url=jdbc:postgresql://postgres:5432/goddd -schemas=goddd -user=goddd -password=goddd -connectRetries=60 migrate
+        volumes:
+            - ./migrations/:/flyway/sql
+        links:
+            - postgres
+        depends_on:
+            - postgres
+
+    # For testing
+    test:
+      build:
+        context: .
+        dockerfile: DockerfileTest
+      links:
+        - postgres
+      environment:
+        DEBUG: 'true'
+        PORT: 8080
+        DATABASE_HOST: postgres
+        DATABASE_PORT: 5432
+        DATABASE_USER: goddd
+        DATABASE_PASSWORD: goddd
+        DATABASE_DB: goddd
