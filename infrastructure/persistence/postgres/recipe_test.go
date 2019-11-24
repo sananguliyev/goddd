@@ -35,12 +35,13 @@ func (suite *RecipeRepositoryTestSuite) SetupTest() {
 func (suite *RecipeRepositoryTestSuite) TestSaveReadDelete() {
 	someId := suite.idGenerator.Generate()
 
+	isVegetarian := true
 	someRecipe := &entity.Recipe{
 		Id:           someId,
 		Name:         "someName",
 		PrepareTime:  15,
 		Difficulty:   15,
-		IsVegetarian: true,
+		IsVegetarian: &isVegetarian,
 	}
 
 	underTest := recipeRepository{db: suite.db}

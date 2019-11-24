@@ -55,11 +55,12 @@ func (suite *MuxTestSuite) TestRouteHealthz() {
 }
 
 func (suite *MuxTestSuite) TestRouteCreate() {
+	isVegetarian := true
 	expected := entity.Recipe{
 		Name:         "GoDDD",
 		PrepareTime:  15,
 		Difficulty:   5,
-		IsVegetarian: true,
+		IsVegetarian: &isVegetarian,
 	}
 	recipeJson, _ := json.Marshal(expected)
 	body := bytes.NewBuffer(recipeJson)

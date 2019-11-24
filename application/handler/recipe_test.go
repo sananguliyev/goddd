@@ -84,7 +84,8 @@ func TestRecipeHandler_Get(t *testing.T) {
 }
 
 func TestRecipeHandler_Create(t *testing.T) {
-	someRecipe := &entity.Recipe{}
+	isVegetarian := false
+	someRecipe := &entity.Recipe{IsVegetarian: &isVegetarian}
 
 	someMessage := "some database issue"
 	someErr := errors.New(someMessage)
@@ -105,7 +106,7 @@ func TestRecipeHandler_Create(t *testing.T) {
 		},
 		{
 			name:               "interactor failed case",
-			someRecipe:         &entity.Recipe{},
+			someRecipe:         &entity.Recipe{IsVegetarian: &isVegetarian},
 			expectedResponse:   &ErrorResponse{StatusCode: http.StatusInternalServerError, Message: someMessage},
 			expectedErr:        someErr,
 			expectedStatusCode: http.StatusInternalServerError,
