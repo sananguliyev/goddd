@@ -15,7 +15,17 @@ install: true
 notifications:
   email: false
 
+services:
+  - postgresql
+
 before_script:
+  # Create `goddd` username, password and database
+  - psql -c "CREATE DATABASE goddd;" -U postgres
+  - psql -c "CREATE USER goddd WITH PASSWORD 'goddd';" -U postgres
+  # Install flyway and migrate
+  - wget -qO- https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/6.0.8/flyway-commandline-6.0.8-linux-x64.tar.gz | tar xvz && sudo ln -s `pwd`/flyway-6.0.8/flyway /usr/local/bin
+  - flyway -locations=filesystem:/migrations -url=jdbc:postgresql://postgres:5432/goddd -schemas=goddd -user=goddd -password=goddd -connectRetries=60 migrate
+  # Generate mock files
   - go get github.com/vektra/mockery/.../
   - mockery -dir domain/repository -name RecipeRepository
   - mockery -dir domain/repository -name RatingRepository
