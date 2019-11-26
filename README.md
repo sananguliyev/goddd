@@ -1,6 +1,6 @@
 # GoDDD (Recipes API)
 [![Build Status](https://travis-ci.org/SananGuliyev/goddd.svg?branch=master)](https://travis-ci.org/SananGuliyev/goddd)
-[![codecov](https://codecov.io/gh/SananGuliyev/goddd/branch/master/graph/badge.svg)](https://codecov.io/gh/SananGuliyev/goddd)
+![Codecov](https://img.shields.io/codecov/c/gh/SananGuliyev/goddd)
 
 This repository is sample recipe service which comes with CRUD and rating the recipes endpoints. This sample is just for giving an idea how to implement the DDD in Go.
 
